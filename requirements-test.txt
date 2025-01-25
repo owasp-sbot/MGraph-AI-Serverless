@@ -1,6 +1,3 @@
-# for main code
-git+https://github.com/owasp-sbot/MGraph-AI.git#egg=MGraph-AI
-
 # for testing
 pytest
 pytest-cov

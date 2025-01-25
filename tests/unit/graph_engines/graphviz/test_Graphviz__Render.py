@@ -1,25 +1,26 @@
-from unittest                                                       import TestCase
-from mgraph_ai.providers.json.MGraph__Json                          import MGraph__Json
-from osbot_utils.utils.Files                                        import file_exists, file_delete
-from mgraph_ai.providers.simple.MGraph__Simple__Test_Data           import MGraph__Simple__Test_Data
-from mgraph_ai_serverless.graph_engines.graphviz.Graphviz__Render   import Graphviz__Render
+from unittest                                                                       import TestCase
+from mgraph_ai.providers.json.MGraph__Json                                          import MGraph__Json
+from mgraph_ai.providers.simple.MGraph__Simple__Test_Data                           import MGraph__Simple__Test_Data
+from mgraph_ai_serverless.graph_engines.graphviz.Graphviz__Render                   import Graphviz__Render
+from mgraph_ai_serverless.graph_engines.graphviz.models.Model__Graphviz__Render_Dot import Model__Graphviz__Render_Dot
 
 
 class test_Graphviz__Render(TestCase):
 
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(cls):                                                        # Setup test data
         cls.graphviz_render = Graphviz__Render()
         cls.test_graph      = MGraph__Simple__Test_Data().create()
         cls.dot_text        = cls.test_graph.export().to__dot()
 
-    def test_render_dot(self):
+    def test_render_dot(self):                                                  # Test PNG rendering
         with self.graphviz_render as _:
-            created_file = _.render_dot(self.dot_text)
-            assert file_exists(created_file) is True
-            assert file_delete(created_file) is True
+            render_config = Model__Graphviz__Render_Dot(dot_source=self.dot_text)
+            result = _.render_dot(render_config)
+            assert isinstance(result, bytes)
+            assert len(result) > 0
 
-    def test_render_dot__json_mgraph(self):
+    def test_render_dot__json_mgraph(self):                                     # Test with JSON data
         mgraph    = MGraph__Json()
         test_data = { "string" : "value"         ,
                       "number" : 42              ,
@@ -30,10 +31,9 @@ class test_Graphviz__Render(TestCase):
 
         mgraph.load().from_json(test_data)
         dot_text = mgraph.export().to_dot().to_string()
+
         with self.graphviz_render as _:
-            created_file = _.render_dot(dot_text)
-            assert file_exists(created_file) is True
-            assert file_delete(created_file) is True
-
-
-
+            render_config = Model__Graphviz__Render_Dot(dot_source=dot_text)
+            result = _.render_dot(render_config)
+            assert isinstance(result, bytes)
+            assert len(result) > 0

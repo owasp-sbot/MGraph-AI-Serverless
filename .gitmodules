@@ -10,3 +10,6 @@
 [submodule "modules/OSBot-Local-Stack"]
 	path = modules/OSBot-Local-Stack
 	url = git@github.com:owasp-sbot/OSBot-Local-Stack.git
+[submodule "modules/MGraph-AI"]
+	path = modules/MGraph-AI
+	url = git@github.com:owasp-sbot/MGraph-AI.git

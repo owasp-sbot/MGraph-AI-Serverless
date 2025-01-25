@@ -8,7 +8,7 @@ runs:
 #      uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/docker__local-stack@dev
 
     - name: Install Graphviz
-      uses: ./github/actions/install-graphviz
+      uses: ./.github/actions/install-graphviz
 
     - name: Install Dependencies
       uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/poetry__install@dev

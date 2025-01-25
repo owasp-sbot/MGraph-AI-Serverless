@@ -1,0 +1,10 @@
+services:
+  mgraph_ai_serverless:
+    build:
+      context: ../../..
+      dockerfile: ./deploy/docker/service/Dockerfile
+    platform: linux/amd64
+    container_name: mgraph_ai_serverless
+    tty: true
+    ports:
+      - "8080:8080"

@@ -2,7 +2,7 @@ services:
   mgraph_ai_serverless:
     build:
       context: ../../..
-      dockerfile: ./deploy/docker/service/Dockerfile
+      dockerfile: ./deploy/docker/mgraph-ai-serverless/Dockerfile
     platform: linux/amd64
     container_name: mgraph_ai_serverless
     tty: true

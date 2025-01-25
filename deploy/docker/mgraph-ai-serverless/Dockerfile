@@ -18,7 +18,7 @@ COPY ../../../mgraph_ai_serverless /app/mgraph_ai_serverless
 
 ENV PYTHONPATH="/app"
 
-COPY ./deploy/docker/service/start.sh /app/start.sh
+COPY ./deploy/docker/mgraph-ai-serverless/start.sh /app/start.sh
 
 CMD ["./start.sh"]
 

@@ -7,7 +7,7 @@ runs:
     - name: Install Graphviz on Ubuntu
       shell: bash
       run: |
-        sudo apt-get update
+        # sudo apt-get update
         sudo apt-get install -y graphviz
 
     - name: Verify Graphviz Installation

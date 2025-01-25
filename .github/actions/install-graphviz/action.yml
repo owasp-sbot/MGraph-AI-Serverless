@@ -1,0 +1,16 @@
+name       : "Install Graphviz"
+description: "A reusable action to install Graphviz"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Graphviz on Ubuntu
+      shell: bash
+      run: |
+        # sudo apt-get update
+        sudo apt-get install -y graphviz
+
+    - name: Verify Graphviz Installation
+      shell: bash
+      run: |
+        dot -V

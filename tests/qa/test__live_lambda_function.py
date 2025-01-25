@@ -1,5 +1,7 @@
 from unittest                                 import TestCase
 
+from osbot_utils.utils.Env import not_in_github_action
+
 from deploy.lambdas.Deploy_Lambda__MGraph_AI_Serverless import Deploy_Lambda__MGraph_AI_Serverless
 from osbot_fast_api.utils.Version                       import version__osbot_fast_api
 from osbot_utils.utils.Json                             import str_to_json
@@ -10,6 +12,9 @@ class test__live_lambda_function(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        if not_in_github_action():
+            import pytest
+            pytest.skip("Needs AWS Credentials")
         cls.deploy_lambda   = Deploy_Lambda__MGraph_AI_Serverless()
         cls.lambda_function = cls.deploy_lambda.lambda_function
 

@@ -4,6 +4,8 @@ description: "A reusable action to install Graphviz"
 runs:
   using: "composite"
   steps:
+    - uses: actions/checkout@v4
+      
     - name: Install Graphviz on Ubuntu
       shell: bash
       run: |

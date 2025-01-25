@@ -13,3 +13,9 @@
 [submodule "modules/MGraph-AI"]
 	path = modules/MGraph-AI
 	url = git@github.com:owasp-sbot/MGraph-AI.git
+[submodule "modules/OSBot-Playwright"]
+	path = modules/OSBot-Playwright
+	url = git@github.com:owasp-sbot/OSBot-Playwright.git
+[submodule "modules/OSBot-Docker"]
+	path = modules/OSBot-Docker
+	url = git@github.com:owasp-sbot/OSBot-Docker.git

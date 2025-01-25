@@ -1,15 +1,16 @@
 from unittest                                 import TestCase
-from osbot_fast_api.utils.Version             import version__osbot_fast_api
-from osbot_utils.utils.Json                   import str_to_json
-from osbot_utils.utils.Objects                import dict_to_obj, __, str_to_obj
-from deploy.lambdas.Deploy_Lambda__Cbr_Custom import Deploy_Lambda__Cbr_Custom
+
+from deploy.lambdas.Deploy_Lambda__MGraph_AI_Serverless import Deploy_Lambda__MGraph_AI_Serverless
+from osbot_fast_api.utils.Version                       import version__osbot_fast_api
+from osbot_utils.utils.Json                             import str_to_json
+from osbot_utils.utils.Objects                          import dict_to_obj, __, str_to_obj
 
 
 class test__live_lambda_function(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.deploy_lambda   = Deploy_Lambda__Cbr_Custom()
+        cls.deploy_lambda   = Deploy_Lambda__MGraph_AI_Serverless()
         cls.lambda_function = cls.deploy_lambda.lambda_function
 
     def test__check_lambda_deployment(self):

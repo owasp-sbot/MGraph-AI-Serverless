@@ -1,16 +1,17 @@
 import pytest
 import requests
-from unittest                                 import TestCase
-from osbot_utils.utils.Env                    import not_in_github_action
-from mgraph_ai_serverless.utils.Version       import version__mgraph_ai_serverless
-from deploy.lambdas.Deploy_Lambda__Cbr_Custom import Deploy_Lambda__Cbr_Custom
+from unittest                                           import TestCase
+from deploy.lambdas.Deploy_Lambda__MGraph_AI_Serverless import Deploy_Lambda__MGraph_AI_Serverless
+from osbot_utils.utils.Env                              import not_in_github_action
+from mgraph_ai_serverless.utils.Version                 import version__mgraph_ai_serverless
+
 
 
 class test__qa__Routes__Info(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.deploy_lambda   = Deploy_Lambda__Cbr_Custom()
+        cls.deploy_lambda   = Deploy_Lambda__MGraph_AI_Serverless()
         cls.lambda_function = cls.deploy_lambda.lambda_function
         cls.lambda_url      = cls.lambda_function.function_url()
         cls.session         = requests.Session()

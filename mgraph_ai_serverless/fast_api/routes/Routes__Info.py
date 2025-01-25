@@ -7,7 +7,7 @@ class Routes__Info(Fast_API_Routes):
     tag :str = 'info'
 
     def ping(self):
-        return 'pong (edited on live OSS session)'
+        return 'pong'
 
     def version(self):
         return {'version': version__mgraph_ai_serverless}

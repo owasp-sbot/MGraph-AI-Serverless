@@ -1,6 +1,6 @@
 from unittest                                           import TestCase
-from mgraph_ai_serverless.fast_api.routes.Routes__Info import Routes__Info
-from mgraph_ai_serverless.utils.Version                import version__mgraph_ai_serverless
+from mgraph_ai_serverless.fast_api.routes.Routes__Info  import Routes__Info
+from mgraph_ai_serverless.utils.Version                 import version__mgraph_ai_serverless
 
 
 class test__int__Routes__Info(TestCase):

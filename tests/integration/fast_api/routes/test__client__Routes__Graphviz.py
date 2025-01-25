@@ -1,11 +1,7 @@
-from unittest                                                           import TestCase
-
-from osbot_utils.utils.Files import file_create_from_bytes
-
+from unittest                                                                       import TestCase
+from osbot_utils.utils.Files                                                        import file_create_from_bytes
 from mgraph_ai_serverless.graph_engines.graphviz.models.Model__Graphviz__Render_Dot import GRAPHVIZ__DOT__SAMPLE_GRAPH_1
-from mgraph_ai_serverless.testing.mgraph_ai_serverless__objs_for_tests  import mgraph_ai_serverless__fast_api__client
-
-
+from mgraph_ai_serverless.testing.mgraph_ai_serverless__objs_for_tests              import mgraph_ai_serverless__fast_api__client
 
 class test__client__Routes__Graphviz(TestCase):
 

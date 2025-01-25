@@ -3,7 +3,7 @@ from mgraph_ai_serverless.utils.Version                 import version__mgraph_a
 from deploy.lambdas.Deploy_Lambda__MGraph_AI_Serverless import Deploy_Lambda__MGraph_AI_Serverless
 
 
-class test_Deploy_Lambda__Cbr_Custom(TestCase):
+class test_Deploy_Lambda__MGraph_AI_Serverless(TestCase):
 
     @classmethod
     def setUpClass(cls):

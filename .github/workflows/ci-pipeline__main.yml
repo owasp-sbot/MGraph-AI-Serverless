@@ -10,7 +10,7 @@ env:
   RELEASE_TYPE     : 'major'
   PACKAGE_NAME     : 'mgraph_ai_serverless'
   DOCKER__CONTEXT  : "."
-  DOCKER__FILE     : './deploy/docker/cbr_custom/Dockerfile'
+  DOCKER__FILE     : './deploy/docker/mgraph-ai-serverless/Dockerfile'
 
 jobs:
 

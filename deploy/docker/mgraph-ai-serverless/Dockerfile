@@ -7,10 +7,10 @@ RUN apt-get update && apt-get install -y \
 RUN pip install mangum uvicorn httpx fastapi python-multipart
 RUN pip install osbot-aws osbot-fast-api
 
-RUN pip install mgraph-ai-serverless
-
 RUN pip install playwright
 RUN playwright install --with-deps chromium
+
+RUN pip install mgraph-ai-serverless
 
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.8.4 /lambda-adapter /opt/extensions/lambda-adapter
 

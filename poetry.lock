@@ -228,6 +228,22 @@ all = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>
 standard = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "jinja2 (>=3.1.5)", "python-multipart (>=0.0.18)", "uvicorn[standard] (>=0.12.0)"]
 
 [[package]]
+name = "graphviz"
+version = "0.20.3"
+description = "Simple Python interface for Graphviz"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "graphviz-0.20.3-py3-none-any.whl", hash = "sha256:81f848f2904515d8cd359cc611faba817598d2feaac4027b266aa3eda7b3dde5"},
+    {file = "graphviz-0.20.3.zip", hash = "sha256:09d6bc81e6a9fa392e7ba52135a9d49f1ed62526f96499325930e87ca1b5925d"},
+]
+
+[package.extras]
+dev = ["flake8", "pep8-naming", "tox (>=3)", "twine", "wheel"]
+docs = ["sphinx (>=5,<7)", "sphinx-autodoc-typehints", "sphinx-rtd-theme"]
+test = ["coverage", "pytest (>=7,<8.1)", "pytest-cov", "pytest-mock (>=3)"]
+
+[[package]]
 name = "h11"
 version = "0.14.0"
 description = "A pure-Python, bring-your-own-I/O implementation of HTTP/1.1"
@@ -358,7 +374,21 @@ files = [
 ]
 
 [[package]]
-name = "osbot_aws"
+name = "mgraph-ai"
+version = "0.5.0"
+description = "MGraph-AI"
+optional = false
+python-versions = "<4.0,>=3.11"
+files = [
+    {file = "mgraph_ai-0.5.0-py3-none-any.whl", hash = "sha256:469e55709163d646517119a5b20e1192cc00fa25177ed9ecb7864d02081a9a1a"},
+    {file = "mgraph_ai-0.5.0.tar.gz", hash = "sha256:30238e4edbd26f2263249757131fc8e0449e43ad0b2e903b825d1b6d9b2c31dd"},
+]
+
+[package.dependencies]
+osbot-utils = "*"
+
+[[package]]
+name = "osbot-aws"
 version = "2.37.17"
 description = "OWASP Security Bot - AWS"
 optional = false
@@ -374,13 +404,13 @@ osbot-utils = "*"
 
 [[package]]
 name = "osbot-fast-api"
-version = "0.7.26"
+version = "0.7.30"
 description = "OWASP Security Bot - Fast API"
 optional = false
 python-versions = "<4.0,>=3.11"
 files = [
-    {file = "osbot_fast_api-0.7.26-py3-none-any.whl", hash = "sha256:3852f1282203203457951b2ea877eebecb7e8f11c85064aa0e242661ec3883ad"},
-    {file = "osbot_fast_api-0.7.26.tar.gz", hash = "sha256:6d3b3deba6acdeb404fa580b13d65f5b2ad890feedd593f7161b6555282202e2"},
+    {file = "osbot_fast_api-0.7.30-py3-none-any.whl", hash = "sha256:075780ad6148057fddd9773a705801d322052c2c53aeefe5d420dd81a65ad593"},
+    {file = "osbot_fast_api-0.7.30.tar.gz", hash = "sha256:d906e692952d904032199a0c357ced8e832c9f96ef327e64fd003367bf194b62"},
 ]
 
 [package.dependencies]
@@ -733,4 +763,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.6.3)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "72ab3757397c8a18c81c0b02a56edfbbc9a1fccc65afe7562b60aa2d779d2d5a"
+content-hash = "09a20d83efb7160542b2219909a77cf61d74393661c776d73ed6554013c223fa"

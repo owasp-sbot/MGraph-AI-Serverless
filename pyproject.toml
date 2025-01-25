@@ -11,11 +11,13 @@ repository  = "https://github.com/owasp-sbot/MGraph-AI-Serverless"
 [tool.poetry.dependencies]
 python           = "^3.11"
 osbot-utils      = "*"
-osbot-aws        = "2.37.17"
+osbot-aws        = "*"
 osbot-fast-api   = "*"
 mangum           = "*"
 httpx            = "*"
 uvicorn          = "*"
+graphviz         = "*"
+mgraph-ai        = "*"
 
 [build-system]
 requires        = ["poetry-core>=1.0.0"]

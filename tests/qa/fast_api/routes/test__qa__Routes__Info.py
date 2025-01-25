@@ -11,6 +11,9 @@ class test__qa__Routes__Info(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        if not_in_github_action():
+            import pytest
+            pytest.skip("Needs AWS Credentials")
         cls.deploy_lambda   = Deploy_Lambda__MGraph_AI_Serverless()
         cls.lambda_function = cls.deploy_lambda.lambda_function
         cls.lambda_url      = cls.lambda_function.function_url()

@@ -8,3 +8,7 @@ services:
     tty: true
     ports:
       - "8080:8080"
+    volumes:
+      - ../../../mgraph_ai_serverless:/app/mgraph_ai_serverless
+    env_file:
+      - ../../../.env

@@ -1,5 +1,5 @@
 from unittest                                                                           import TestCase
-from mgraph_ai_serverless.graph_engines.playwright.steps.Flow__Playwright__Get_Page_Pdf import Flow__Playwright__Get_Page_Pdf
+from mgraph_ai_serverless.graph_engines.playwright.flows.Flow__Playwright__Get_Page_Pdf import Flow__Playwright__Get_Page_Pdf
 from osbot_utils.utils.Misc                                                             import base64_to_bytes
 from tests.integration.obj_for_tests__mgraph_ai_serverless                              import ensure_browser_is_installed
 

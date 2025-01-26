@@ -63,11 +63,15 @@ class Routes__Browser(Fast_API_Routes):
 
             return response
 
+    def chrome_path(self):
+        return Playwright__Serverless().chrome_path()
+
     def setup_routes(self):
         self.add_route_get(self.url_html        )
         self.add_route_get(self.url_pdf         )
         self.add_route_get(self.url_screenshot  )
         self.add_route_get(self.install_browser )
+        self.add_route_get(self.chrome_path     )
 
         # self.add_route_get(self.launch_browser)
         # self.add_route_get(self.new_page      )

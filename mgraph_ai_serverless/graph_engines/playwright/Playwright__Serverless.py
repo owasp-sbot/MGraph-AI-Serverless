@@ -1,5 +1,4 @@
-from osbot_utils.type_safe.Type_Safe import Type_Safe
-
+from osbot_utils.type_safe.Type_Safe                import Type_Safe
 from osbot_playwright.playwright.api.Playwright_CLI import Playwright_CLI
 from playwright.async_api                           import async_playwright, Playwright, Browser, Page, Response
 from osbot_utils.decorators.methods.cache_on_self   import cache_on_self

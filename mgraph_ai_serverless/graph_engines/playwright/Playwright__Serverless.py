@@ -5,7 +5,8 @@ from osbot_playwright.playwright.api.Playwright_CLI import Playwright_CLI
 from playwright.async_api                           import async_playwright, Playwright, Browser, Page, Response
 from osbot_utils.decorators.methods.cache_on_self   import cache_on_self
 
-LINUX__PLAYWRIGHT__CHROME__PATH = '/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome'  # todo: find better way to handle this, the problem was that we were installing chrome during the docker setup, but that was not picked up by the playwright process
+#LINUX__PLAYWRIGHT__CHROME__PATH = '/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome'  # todo: find better way to handle this, the problem was that we were installing chrome during the docker setup, but that was not picked up by the playwright process
+LINUX__PLAYWRIGHT__CHROME__PATH = '/opt/playwright/chromium-1148/chrome-linux/chrome'
 
 class Playwright__Serverless(Type_Safe):
     browser        : Browser             = None

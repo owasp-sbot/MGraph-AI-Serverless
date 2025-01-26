@@ -38,21 +38,44 @@ class test_local_docker__shell_lambda(TestCase):
         # { 'install_location': '/tmp/osbot_playwright_browsers/chromium-1148',
         #   'install_status': False}
 
-    def test_2_playwright__executable_path__chrome(self):
-        def playwright___executable_path__chrome():
-            from osbot_playwright.playwright.api.Playwright_CLI import Playwright_CLI
+    # def test_2_playwright__executable_path__chrome(self):
+    #     def playwright___executable_path__chrome():
+    #         from osbot_playwright.playwright.api.Playwright_CLI import Playwright_CLI
+    #
+    #         Playwright_CLI.executable_path__chrome = lambda _: '/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome'
+    #
+    #         with Playwright_CLI() as _:
+    #
+    #             return _.executable_path__chrome()
 
-            Playwright_CLI.executable_path__chrome = lambda _: '/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome'
+    def test_2_playwright__check_docker_install_location(self):
+        assert self.shell.ls('/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome') == '/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome\n'
+        assert self.shell.ls('/root/.cache/ms-playwright/chromium-1148/chrome-linux'       ) == ('MEIPreload\n'
+                                                                                                 'PrivacySandboxAttestationsPreloaded\n'
+                                                                                                 'chrome\n'
+                                                                                                 'chrome-wrapper\n'
+                                                                                                 'chrome_100_percent.pak\n'
+                                                                                                 'chrome_200_percent.pak\n'
+                                                                                                 'chrome_crashpad_handler\n'
+                                                                                                 'chrome_sandbox\n'
+                                                                                                 'icudtl.dat\n'
+                                                                                                 'libEGL.so\n'
+                                                                                                 'libGLESv2.so\n'
+                                                                                                 'libvk_swiftshader.so\n'
+                                                                                                 'libvulkan.so.1\n'
+                                                                                                 'locales\n'
+                                                                                                 'product_logo_48.png\n'
+                                                                                                 'resources\n'
+                                                                                                 'resources.pak\n'
+                                                                                                 'v8_context_snapshot.bin\n'
+                                                                                                 'vk_swiftshader_icd.json\n'
+                                                                                                 'xdg-mime\n'
+                                                                                                 'xdg-settings\n')
+        assert self.shell.ls('/root/.cache/ms-playwright/chromium-1148/'                   ) == 'DEPENDENCIES_VALIDATED\nINSTALLATION_COMPLETE\nchrome-linux\n'
+        assert self.shell.ls('/root/.cache/ms-playwright/'                                 ) == 'chromium-1148\nchromium_headless_shell-1148\nffmpeg-1010\n'
+        assert self.shell.ls('/root/.cache/'                                               ) == 'ms-playwright\npip\n'
+        assert self.shell.ls('/root/'                                                      ) == ''
 
-            with Playwright_CLI() as _:
-
-                return _.executable_path__chrome()
-
-        #response = self.shell.function(playwright___executable_path__chrome)
-
-        #response = self.shell.ls('/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome')
-        response = self.shell.ls('/tmp/osbot_playwright_browsers/chromium-1148')
-        pprint(response)
 
 
 

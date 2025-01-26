@@ -8,7 +8,8 @@ RUN pip install mangum uvicorn httpx fastapi python-multipart
 RUN pip install osbot-aws osbot-fast-api
 
 RUN pip install playwright
-RUN playwright install --with-deps chromium
+#RUN playwright install --with-deps chromium
+RUN PLAYWRIGHT_BROWSERS_PATH=/opt/playwright playwright install --with-deps chromium
 
 RUN pip install mgraph-ai-serverless
 

@@ -1,9 +1,9 @@
 import io
 
 from mgraph_ai_serverless.graph_engines.playwright.Playwright__Serverless                       import Playwright__Serverless
-from mgraph_ai_serverless.graph_engines.playwright.steps.Flow__Playwright__Get_Page_Html        import Flow__Playwright__Get_Page_Html
-from mgraph_ai_serverless.graph_engines.playwright.steps.Flow__Playwright__Get_Page_Pdf         import Flow__Playwright__Get_Page_Pdf
-from mgraph_ai_serverless.graph_engines.playwright.steps.Flow__Playwright__Get_Page_Screenshot  import Flow__Playwright__Get_Page_Screenshot
+from mgraph_ai_serverless.graph_engines.playwright.flows.Flow__Playwright__Get_Page_Html        import Flow__Playwright__Get_Page_Html
+from mgraph_ai_serverless.graph_engines.playwright.flows.Flow__Playwright__Get_Page_Pdf         import Flow__Playwright__Get_Page_Pdf
+from mgraph_ai_serverless.graph_engines.playwright.flows.Flow__Playwright__Get_Page_Screenshot  import Flow__Playwright__Get_Page_Screenshot
 from osbot_fast_api.api.Fast_API_Routes                                                         import Fast_API_Routes
 from starlette.responses                                                                        import StreamingResponse
 

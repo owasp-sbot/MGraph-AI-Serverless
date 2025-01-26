@@ -1,4 +1,5 @@
 import mgraph_ai_serverless
+from mgraph_ai_serverless.graph_engines.playwright.routes.Routes__Web_Root import Routes__Web_Root
 from osbot_utils.utils.Files                                                import path_combine
 from mgraph_ai_serverless.fast_api.routes.Routes__Debug                     import Routes__Debug
 from mgraph_ai_serverless.graph_engines.graphviz.routes.Routes__Graphviz    import Routes__Graphviz
@@ -16,8 +17,9 @@ class MGraph_AI_Serverless__Fast_API(Fast_API):
 
     def setup_routes(self):
         self.add_routes(Routes__Info    )
-        self.add_routes(Routes__Debug   )
+        self.add_routes(Routes__Web_Root)
         self.add_routes(Routes__Graphviz)
         self.add_routes(Routes__Browser )
+        self.add_routes(Routes__Debug   )
 
 

@@ -15,7 +15,25 @@ class Routes__Web_Root(Fast_API_Routes):
 
     def render_file(self, target_page = 'examples/hello-world.html'):
         target_url = self.target_url(target_page=target_page)
-        run_data = self.web_root_render.render_page(target_url)
+        run_data   = self.web_root_render.render_page(target_url)
+        screenshot_bytes = run_data.get('screenshot_bytes')
+
+        screenshot_stream = io.BytesIO(screenshot_bytes)
+        response          = StreamingResponse(screenshot_stream,
+                                              media_type = "image/png",
+                                              headers    = {"Content-Disposition": "attachment; filename=screenshot.png"})
+        return response
+
+    def render_js(self, target_page = 'examples/hello-world.html'):
+        js_code = """
+                        document.body.style.backgroundColor = "black";
+                        document.body.style.color           = "white";
+                        document.body.innerHTML = '<h1>Dynamic JS</h1>';
+                   """
+        target_url = self.target_url('static/examples/hello-world.html')
+
+        target_url = self.target_url(target_page=target_page)
+        run_data   = self.web_root_render.render_page(target_url, js_code=js_code)
         screenshot_bytes = run_data.get('screenshot_bytes')
 
         screenshot_stream = io.BytesIO(screenshot_bytes)

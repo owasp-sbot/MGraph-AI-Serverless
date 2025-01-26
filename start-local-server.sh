@@ -1,1 +1,1 @@
-uvicorn mgraph_ai_serverless.lambdas.handler:app --reload --host 0.0.0.0 --port 7770
+uvicorn mgraph_ai_serverless.lambdas.handler:app --reload --host 0.0.0.0 --port 8080

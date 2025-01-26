@@ -1,4 +1,6 @@
 from unittest                                                                   import TestCase
+from osbot_utils.utils.Files                                                    import save_bytes_as_file, file_exists, file_delete
+from mgraph_ai.providers.json.MGraph__Json                                      import MGraph__Json
 from osbot_utils.utils.Http                                                     import url_join_safe
 from mgraph_ai_serverless.testing.mgraph_ai_serverless__objs_for_tests          import mgraph_ai_serverless__fast_api__app
 from osbot_fast_api.utils.Fast_API_Server                                       import Fast_API_Server
@@ -46,4 +48,43 @@ class test_Web_Root__Render(TestCase):
             assert screenshot_bytes.startswith(b'\x89PNG') is True
             #save_bytes_as_file(screenshot_bytes, '/tmp/hello-world.png')
 
+    def test_render_mermaid(self):
+        test_data = { "string" : "value"         ,
+                           "number" : 42                ,
+                           "boolean": True              ,
+                           "null"   : None              ,
+                           "array"  : [1, 2, 3]         ,
+                           "object" : {"key": "value"}}
+
+        with MGraph__Json() as _:
+            _.load().from_json(test_data)
+            mermaid_code = _.export().to__mermaid().to_string()
+
+        with self.web_root_render as _:
+            target_file = '/tmp/mermaid.png'
+            _.target_server = f'http://localhost:{self.fast_api_server.port}/static'
+            screenshot_bytes = _.render__mermaid(mermaid_code)
+            assert screenshot_bytes.startswith(b'\x89PNG') is True
+            save_bytes_as_file(screenshot_bytes, target_file)
+            assert file_exists(target_file) is True
+            assert file_delete(target_file) is True
+
+
+    def test_render__mgraph__json__mermaid(self):                                     # Test with JSON data
+        mgraph    = MGraph__Json()
+        test_data = { "string" : "value"         ,
+                      "number" : 42              ,
+                      "boolean": True            ,
+                      "null"   : None            ,
+                      "array"  : [1, 2, 3]       ,
+                      "object" : {"key": "value"}}
+
+        mgraph.load().from_json(test_data)
+        dot_text = mgraph.export().to_dot().to_string()
+
+        # with self.graphviz_render as _:
+        #     render_config = Model__Graphviz__Render_Dot(dot_source=dot_text)
+        #     result = _.render_dot(render_config)
+        #     assert isinstance(result, bytes)
+        #     assert len(result) > 0
 

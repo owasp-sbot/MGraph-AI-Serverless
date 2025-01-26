@@ -5,7 +5,7 @@ from mgraph_ai_serverless.graph_engines.graphviz.Graphviz__Render               
 from mgraph_ai_serverless.graph_engines.graphviz.models.Model__Graphviz__Render_Dot import Model__Graphviz__Render_Dot
 
 
-class test_Graphviz__Render(TestCase):
+class test__int__Graphviz__Render(TestCase):
 
     @classmethod
     def setUpClass(cls):                                                        # Setup test data
@@ -20,7 +20,7 @@ class test_Graphviz__Render(TestCase):
             assert isinstance(result, bytes)
             assert len(result) > 0
 
-    def test_render_dot__json_mgraph(self):                                     # Test with JSON data
+    def test_render_dot__json(self):                                     # Test with JSON data
         mgraph    = MGraph__Json()
         test_data = { "string" : "value"         ,
                       "number" : 42              ,

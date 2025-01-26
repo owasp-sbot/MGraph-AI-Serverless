@@ -503,14 +503,14 @@ files = [
 
 [[package]]
 name = "mgraph-ai"
-version = "0.6.0"
+version = "0.7.0"
 description = "MGraph-AI"
 optional = false
 python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "mgraph_ai-0.6.0-py3-none-any.whl", hash = "sha256:e14ff834e9178c426dfe652aad329b421c0f7946f525ef8b1999c7fd1fb93267"},
-    {file = "mgraph_ai-0.6.0.tar.gz", hash = "sha256:a4293e7a0535e25dd8615f80fad4b2a25a61f77cf6c5f4f42a8c24ea79c1eff9"},
+    {file = "mgraph_ai-0.7.0-py3-none-any.whl", hash = "sha256:ad319a5ca5937954163db0a5c0d575078d7546bc8b96297e6108ef15ae54517b"},
+    {file = "mgraph_ai-0.7.0.tar.gz", hash = "sha256:e6c796cfe9fc81d745115107d0e5ce79fdc94dda603d8f7a31448b5cc5f79469"},
 ]
 
 [package.dependencies]

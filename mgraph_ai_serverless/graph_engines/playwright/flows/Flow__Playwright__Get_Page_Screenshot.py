@@ -10,6 +10,7 @@ class Flow__Playwright__Get_Page_Screenshot(Type_Safe):             # refactor w
 
     playwright_serverless : Playwright__Serverless
     url                   : str = 'https://httpbin.org/get'
+    js_code               : str = None
 
     @task()
     def check_config(self) -> Browser:
@@ -32,6 +33,11 @@ class Flow__Playwright__Get_Page_Screenshot(Type_Safe):             # refactor w
         await asyncio.sleep(1)
 
     @task()
+    async def execute_js(self) -> Browser:
+        if self.js_code:
+            await self.playwright_serverless.page.evaluate(self.js_code)
+
+    @task()
     async def capture_screenshot(self, flow_data: dict) -> Browser:
         screenshot_bytes = await self.playwright_serverless.page.screenshot(full_page=True)
         flow_data['screenshot_bytes'] = screenshot_bytes
@@ -50,6 +56,7 @@ class Flow__Playwright__Get_Page_Screenshot(Type_Safe):             # refactor w
         await self.launch_browser    ()
         await self.new_page          ()
         await self.open_url          ()
+        await self.execute_js        ()
         await self.capture_screenshot()
         self.convert_to_base64       ()
         return 'all done'

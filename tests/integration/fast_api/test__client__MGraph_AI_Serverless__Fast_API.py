@@ -1,11 +1,15 @@
+from unittest                                                           import TestCase
+from mgraph_ai_serverless.testing.mgraph_ai_serverless__objs_for_tests  import mgraph_ai_serverless__fast_api__client
+
+
 class test__client__MGraph_AI_Serverless__Fast_API(TestCase):
 
     @classmethod
-    def setUpClass(cls) -> None:
-        cls.fast_api = MGraph_AI_Serverless__Fast_API()
+    def setUpClass(cls):
+        cls.client = mgraph_ai_serverless__fast_api__client
 
-    def test_path_static_folder(self):
-        with self.fast_api as _:
-            static_folder = _.path_static_folder()
-            assert folder_exists(static_folder)
-            assert folder_name  (static_folder) == 'web_root'
+    def test__static__examples(self):
+        assert self.client.get('/static/favicon.ico'              ).status_code == 200
+        assert self.client.get('/static/examples/hello-world.html').status_code == 200
+        assert self.client.get('/static/examples/markdown.html'   ).status_code == 200
+

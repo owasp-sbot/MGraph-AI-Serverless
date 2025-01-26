@@ -1,8 +1,6 @@
-from unittest import TestCase
-
-from osbot_utils.utils.Files import folder_name, folder_exists
-
-from mgraph_ai_serverless.fast_api.MGraph_AI_Serverless__Fast_API import MGraph_AI_Serverless__Fast_API
+from unittest                                                       import TestCase
+from osbot_utils.utils.Files                                        import folder_name, folder_exists
+from mgraph_ai_serverless.fast_api.MGraph_AI_Serverless__Fast_API   import MGraph_AI_Serverless__Fast_API
 
 
 class test_MGraph_AI_Serverless__Fast_API(TestCase):

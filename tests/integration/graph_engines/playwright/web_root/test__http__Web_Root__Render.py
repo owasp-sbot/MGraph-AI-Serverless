@@ -50,4 +50,6 @@ class test_Web_Root__Render(TestCase):
             response         = _.render_page(target_url, js_code)
             screenshot_bytes = response.get('screenshot_bytes')
             assert screenshot_bytes.startswith(b'\x89PNG') is True
-            #save_bytes_as_file(screenshot_bytes, '/tmp/hello-world.png', js_code)
+            #save_bytes_as_file(screenshot_bytes, '/tmp/hello-world.png')
+
+

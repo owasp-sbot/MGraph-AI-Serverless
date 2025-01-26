@@ -1,5 +1,5 @@
-from mgraph_ai_serverless.graph_engines.playwright.flows.Flow__Playwright__Get_Page_Screenshot import Flow__Playwright__Get_Page_Screenshot
-from osbot_utils.type_safe.Type_Safe import Type_Safe
+from mgraph_ai_serverless.graph_engines.playwright.flows.Flow__Playwright__Get_Page_Screenshot  import Flow__Playwright__Get_Page_Screenshot
+from osbot_utils.type_safe.Type_Safe                                                            import Type_Safe
 
 
 class Web_Root__Render(Type_Safe):

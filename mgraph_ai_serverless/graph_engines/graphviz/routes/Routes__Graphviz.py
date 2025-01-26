@@ -10,12 +10,10 @@ class Routes__Graphviz(Fast_API_Routes):
     tag             : str = 'graphviz'
 
     def render_dot(self, graphviz_render_dot: Model__Graphviz__Render_Dot) -> Response:
-        #try:
-            bytes_data = self.graphviz_render.render_dot(graphviz_render_dot)
-            output_format = graphviz_render_dot.output_format
-            return Response(content=bytes_data, media_type=f"image/{output_format.value}")
-        #except Exception as error:
-        #    return f"{error}"
+        bytes_data = self.graphviz_render.render_dot(graphviz_render_dot)
+        output_format = graphviz_render_dot.output_format
+        return Response(content=bytes_data, media_type=f"image/{output_format.value}")
+
 
     def setup_routes(self):
         self.add_route(self.render_dot, methods=['POST'])

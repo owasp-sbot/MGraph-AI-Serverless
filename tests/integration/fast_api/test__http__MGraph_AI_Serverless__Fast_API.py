@@ -31,3 +31,5 @@ class test__http__MGraph_AI_Serverless__Fast_API(TestCase):
         assert response__hello_world.status_code == 200
         assert response__hello_world.text        == contents__hello_world
 
+    # def test__http__root__render_mermaid(self):
+    #     assert self.fast_api_server.requests_post('/web_root/render-mermaid' ).status_code == 200

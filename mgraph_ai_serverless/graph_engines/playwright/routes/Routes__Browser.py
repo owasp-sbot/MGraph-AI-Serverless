@@ -16,20 +16,20 @@ class Routes__Browser(Fast_API_Routes):
     tag : str = 'browser'
 
 
-    def install_browser(self):
-        playwright_browser = Playwright__Serverless()
-        result             = playwright_browser.browser__install()
-        return dict(status=result)
+    # def install_browser(self):
+    #     playwright_browser = Playwright__Serverless()
+    #     result             = playwright_browser.browser__install()
+    #     return dict(status=result)
 
     def url_html(self, url="https://httpbin.org/get"):
-        self.install_browser()                                              # todo: BUG: for now, put the check there to make sure the browser is installed
+        #self.install_browser()                                              # todo: BUG: for now, put the check there to make sure the browser is installed
         with Flow__Playwright__Get_Page_Html() as _:
             _.url = url
             result = _.run()
             return result
 
     def url_pdf(self, url="https://httpbin.org/get", return_file:bool=False):           # todo: refactor with url_screenshot
-        self.install_browser()                                                          # todo:  BUG: for now, put the check there to make sure the browser is installed
+        #self.install_browser()                                                          # todo:  BUG: for now, put the check there to make sure the browser is installed
         with Flow__Playwright__Get_Page_Pdf() as _:
             _.url = url
             run_data   =_.run()
@@ -47,7 +47,7 @@ class Routes__Browser(Fast_API_Routes):
             return response
 
     def url_screenshot(self, url="https://httpbin.org/get", return_file:bool=False):
-        self.install_browser()                                                           # todo:  BUG: for now, put the check there to make sure the browser is installed
+        #self.install_browser()                                                           # todo:  BUG: for now, put the check there to make sure the browser is installed
         with Flow__Playwright__Get_Page_Screenshot() as _:
             _.url = url
             run_data = _.run()
@@ -63,11 +63,15 @@ class Routes__Browser(Fast_API_Routes):
 
             return response
 
+    def chrome_path(self):
+        return Playwright__Serverless().chrome_path()
+
     def setup_routes(self):
         self.add_route_get(self.url_html        )
         self.add_route_get(self.url_pdf         )
         self.add_route_get(self.url_screenshot  )
-        self.add_route_get(self.install_browser )
+        #self.add_route_get(self.install_browser )
+        self.add_route_get(self.chrome_path     )
 
         # self.add_route_get(self.launch_browser)
         # self.add_route_get(self.new_page      )

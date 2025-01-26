@@ -7,33 +7,49 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <style>
         body {
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
             background-color: #ffffff;
         }
-        #mermaid {
-            border: 1px solid #ddd;
-            padding: 10px;
-            background-color: #f9f9f9;
-            max-width: 90%;
-            overflow-x: auto;
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+        .mermaid {
+            width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <div class="mermaid">
-graph TD
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-</div>
+
+    <div class="diagram-container">
+        <div class="mermaid">
+            graph TD
+                A-->B;
+                A-->C;
+                B-->D;
+                C-->D;
+        </div>
+    </div>
     <script>
-        mermaid.initialize({ startOnLoad: true });
-        mermaid.init(undefined, ".mermaid");
+        mermaid.initialize({
+            startOnLoad : true,
+            theme       : 'default',
+            sequence: {
+                useMaxWidth: false,
+                // width: 800,
+                // height: 600,
+                boxMargin: 10
+            }
+        });
     </script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+import asyncio
+
 from osbot_utils.type_safe.Type_Safe                                        import Type_Safe
 from mgraph_ai_serverless.graph_engines.playwright.Playwright__Serverless   import Playwright__Serverless
 from osbot_utils.utils.Misc                                                 import bytes_to_base64
@@ -9,8 +11,9 @@ from osbot_utils.helpers.flows.decorators.flow                              impo
 class Flow__Playwright__Get_Page_Screenshot(Type_Safe):             # refactor with Flow__Playwright__Get_Page_Html since 90% of the code is the same
 
     playwright_serverless : Playwright__Serverless
-    url                   : str = 'https://httpbin.org/get'
-    js_code               : str = None
+    url                   : str   = 'https://httpbin.org/get'
+    js_code               : str   = None
+    wait_for              : float = 0.0
 
     @task()
     def check_config(self) -> Browser:
@@ -35,7 +38,12 @@ class Flow__Playwright__Get_Page_Screenshot(Type_Safe):             # refactor w
     @task()
     async def execute_js(self) -> Browser:
         if self.js_code:
-            await self.playwright_serverless.page.evaluate(self.js_code)
+            try:
+                await self.playwright_serverless.page.evaluate(self.js_code)
+                if self.wait_for:
+                    await asyncio.sleep(self.wait_for)
+            except Exception as error:
+                print(f"Error executing js code: {error}")
 
     @task()
     async def capture_screenshot(self, flow_data: dict) -> Browser:

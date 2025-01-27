@@ -1,4 +1,5 @@
 from unittest                                                                   import TestCase
+from mgraph_ai.mgraph.actions.exporters.MGraph__Export__Cytoscape               import MGraph__Export__Cytoscape
 from osbot_utils.utils.Files                                                    import save_bytes_as_file, file_exists, file_delete
 from mgraph_ai.providers.json.MGraph__Json                                      import MGraph__Json
 from osbot_utils.utils.Http                                                     import url_join_safe
@@ -57,8 +58,8 @@ class test_Web_Root__Render(TestCase):
                            "object" : {"key": "value"}}
 
         with MGraph__Json() as _:
-            _.load().from_json(test_data)
-            mermaid_code = _.export().to__mermaid().to_string()
+            _.load().from_data(test_data)
+            mermaid_code = _.export().to_mermaid().to_string()
 
         with self.web_root_render as _:
             target_file = '/tmp/mermaid.png'
@@ -70,21 +71,26 @@ class test_Web_Root__Render(TestCase):
             assert file_delete(target_file) is True
 
 
-    def test_render__mgraph__json__mermaid(self):                                     # Test with JSON data
-        mgraph    = MGraph__Json()
-        test_data = { "string" : "value"         ,
-                      "number" : 42              ,
-                      "boolean": True            ,
-                      "null"   : None            ,
-                      "array"  : [1, 2, 3]       ,
-                      "object" : {"key": "value"}}
 
-        mgraph.load().from_json(test_data)
-        dot_text = mgraph.export().to_dot().to_string()
+    def test_render_cytoscape(self):
+        test_data = { "stringAAA" : "valueBBB"     ,
+                      "number" : 42                ,
+                      "boolean": True              ,
+                      "#null"   : None             ,
+                      "array"  : [1, 2, 3]         ,
+                      "object" : {"key": "value"  }
+                      }
+        with MGraph__Json() as _:
+            _.load().from_data(test_data)
+            export_cytoscape = MGraph__Export__Cytoscape(graph=_.graph)
+            cytoscape_code   = export_cytoscape.process_graph()               #_.export().to_mermaid().to_string()
 
-        # with self.graphviz_render as _:
-        #     render_config = Model__Graphviz__Render_Dot(dot_source=dot_text)
-        #     result = _.render_dot(render_config)
-        #     assert isinstance(result, bytes)
-        #     assert len(result) > 0
+        with self.web_root_render as _:
+            target_file = '/tmp/cytoscape.png'
+            _.target_server = f'http://localhost:{self.fast_api_server.port}/static'
+            screenshot_bytes = _.render__cytoscape(cytoscape_code)
 
+            assert screenshot_bytes.startswith(b'\x89PNG') is True
+            save_bytes_as_file(screenshot_bytes, target_file)
+            assert file_exists(target_file) is True
+            assert file_delete(target_file) is True

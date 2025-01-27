@@ -55,8 +55,8 @@ class test__qa__Routes__Web_Root(TestCase):
 
         mgraph_json     = MGraph__Json()
 
-        mgraph_json.load().from_json(test_data)
-        mermaid_code    = mgraph_json.export().to__mermaid().to_string()
+        mgraph_json.load().from_data(test_data)
+        mermaid_code    = mgraph_json.export().to_mermaid().to_string()
 
         target_url       = self.get_url('/web_root/render-mermaid')
         response         = requests.post(target_url, json={ 'mermaid_code': mermaid_code })

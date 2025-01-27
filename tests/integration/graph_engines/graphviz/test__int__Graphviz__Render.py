@@ -29,7 +29,7 @@ class test__int__Graphviz__Render(TestCase):
                       "array"  : [1, 2, 3]       ,
                       "object" : {"key": "value"}}
 
-        mgraph.load().from_json(test_data)
+        mgraph.load().from_data(test_data)
         dot_text = mgraph.export().to_dot().to_string()
 
         with self.graphviz_render as _:

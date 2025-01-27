@@ -37,26 +37,27 @@ class test__qa__Routes__Matplotlib(TestCase):
 
     def test__2__matplotlib__render_json_graph(self):
         target_url = self.get_url('/matplotlib/render-graph')
-
-        test_data = { "string" : "value"           ,
-                      "number" : 42                ,
-                      "boolean": True              ,
-                      "null"   : None              ,
-                      "array"  : [1, 2, 3,5]         ,
-                      "object" : {"key": "value"   }}
+        test_data  = { "string" : "value"           ,
+                       "number" : 42                ,
+                       "boolean": True              ,
+                       "null"   : None              ,
+                       "array"  : [1, 2, 3,4,5,6,7,8,9,10, {'a':'b', 'c':'d', 'e':[1,2,3,4]}]         ,
+                       "object" : {"key": "value"   }}
 
         mgraph_json = MGraph__Json()
         mgraph_json.load().from_data(test_data)
 
-        render_config = Model__Matplotlib__Render(graph_data = mgraph_json.graph.json(),
-                                                  layout     = 'circular'              )
-        response = requests.post(target_url, json=asdict(render_config))
+        render_config    = Model__Matplotlib__Render(graph_data = mgraph_json.graph.json(),
+                                                     #layout     = 'circular'              ,
+                                                     node_size  = 300                      )
+        response         = requests.post(target_url, json=asdict(render_config))
         screenshot_bytes = response.content
 
         assert response.status_code                    == 200
         assert screenshot_bytes.startswith(b'\x89PNG') is True
 
-        #file_create_from_bytes('./matplotlib_json.png', screenshot_bytes)
+        # from osbot_utils.utils.Files import file_create_from_bytes
+        # file_create_from_bytes('./matplotlib_json.png', screenshot_bytes)
 
     def test__3__matplotlib__render_formats(self):
         target_url = self.get_url('/matplotlib/render-graph')

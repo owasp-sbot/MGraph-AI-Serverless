@@ -13,8 +13,6 @@ class test_Routes__Matplotlib(TestCase):
         cls.routes    = Routes__Matplotlib()
 
     def setUp(self):
-        from osbot_utils.utils.Dev import pprint
-        pprint(self.test_graph.graph.json())
         self.render_config = Model__Matplotlib__Render(graph_data       = self.test_graph.graph.json(), # Default render config with graph data
                                                        domain_type_name = 'Domain__Simple__Graph'    )
 

@@ -1,5 +1,6 @@
 from fastapi                                                                          import Response, HTTPException
 from starlette.status                                                                 import HTTP_400_BAD_REQUEST
+from mgraph_ai.providers.json.domain.Domain__MGraph__Json__Graph                      import Domain__MGraph__Json__Graph
 from mgraph_ai.providers.simple.domain.Domain__Simple__Graph                          import Domain__Simple__Graph
 from mgraph_ai_serverless.graph_engines.matplotlib.models.Model__Matplotlib__Render   import Model__Matplotlib__Render
 from mgraph_ai_serverless.graph_engines.matplotlib.Matplotlib__Render                 import Matplotlib__Render
@@ -7,10 +8,8 @@ from osbot_fast_api.api.Fast_API_Routes                                         
 
 ROUTES__MATPLOTLIB__RENDER = ['/render-graph']
 
-DOMAIN_TYPES = {
-    'Domain__Simple__Graph': Domain__Simple__Graph,
-    # Add other domain types here as needed
-}
+DOMAIN_TYPES = { 'Domain__Simple__Graph'      : Domain__Simple__Graph       ,                           # allow-list of supported domain types
+                 'Domain__MGraph__Json__Graph': Domain__MGraph__Json__Graph }
 
 class Routes__Matplotlib(Fast_API_Routes):
     tag: str = 'matplotlib'
@@ -23,7 +22,7 @@ class Routes__Matplotlib(Fast_API_Routes):
             raise HTTPException(status_code=HTTP_400_BAD_REQUEST,
                                 detail="No domain type specified")
 
-        domain_type = DOMAIN_TYPES.get(matplotlib_render.domain_type_name)                          # Get the correct domain type class
+        domain_type = DOMAIN_TYPES.get(matplotlib_render.domain_type_name)                              # Get the correct domain type class
         if not domain_type:
             raise HTTPException(status_code = HTTP_400_BAD_REQUEST,
                                 detail      = f"Unsupported domain type: {matplotlib_render.domain_type_name}")

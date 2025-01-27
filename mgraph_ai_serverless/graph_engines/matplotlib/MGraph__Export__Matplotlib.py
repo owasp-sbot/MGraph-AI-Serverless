@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
+
 import networkx          as nx
 import matplotlib.pyplot as plt
 from typing                                                     import Dict, Any, Optional

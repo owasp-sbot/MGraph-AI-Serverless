@@ -13,8 +13,7 @@ class test_Routes__Matplotlib(TestCase):
         cls.routes    = Routes__Matplotlib()
 
     def setUp(self):
-        self.render_config = Model__Matplotlib__Render(graph_data       = self.test_graph.graph.json(), # Default render config with graph data
-                                                       domain_type_name = 'Domain__Simple__Graph'    )
+        self.render_config = Model__Matplotlib__Render(graph_data = self.test_graph.graph.json()) # Default render config with graph data
 
     def test_init(self):                                                            # Test initialization
         assert type(self.routes)        is Routes__Matplotlib

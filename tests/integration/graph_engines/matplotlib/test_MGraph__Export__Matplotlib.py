@@ -1,6 +1,5 @@
 import networkx as nx
 from unittest                                                                   import TestCase
-from osbot_utils.utils.Files                                                    import file_create_from_bytes
 from mgraph_ai.providers.simple.schemas.Schema__Simple__Node                    import Schema__Simple__Node
 from mgraph_ai_serverless.graph_engines.matplotlib.MGraph__Export__Matplotlib   import MGraph__Export__Matplotlib
 from osbot_utils.type_safe.Type_Safe                                            import Type_Safe
@@ -112,7 +111,7 @@ class test_MGraph__Export__NetworkX(TestCase):
                     image_data[0:4].startswith(b'%PDF')                                  # Check PDF header
                 elif format == 'svg':
                     image_data[0:5].startswith(b'<?xml vers')                            # Check SVG header
-                file_create_from_bytes(f'/tmp/test_image_{layout}.{format}', image_data) # Save image to file
+                #file_create_from_bytes(f'/tmp/test_image_{layout}.{format}', image_data) # Save image to file
 
     def test_format_output(self):                                                       # Test output formatting
         with self.mgraph_simple.edit() as edit:

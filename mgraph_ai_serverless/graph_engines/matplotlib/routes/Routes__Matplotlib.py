@@ -12,24 +12,16 @@ DOMAIN_TYPES = { 'Domain__Simple__Graph'      : Domain__Simple__Graph       ,   
                  'Domain__MGraph__Json__Graph': Domain__MGraph__Json__Graph }
 
 class Routes__Matplotlib(Fast_API_Routes):
-    tag: str = 'matplotlib'
+    tag                : str = 'matplotlib'
+    matplotlib__render : Matplotlib__Render
 
     def render_graph(self, matplotlib_render: Model__Matplotlib__Render) -> Response:
-        if not matplotlib_render.graph_data:
-            raise HTTPException(status_code=HTTP_400_BAD_REQUEST,
-                                detail="No graph data provided for rendering" )
-        if not matplotlib_render.domain_type_name:
-            raise HTTPException(status_code=HTTP_400_BAD_REQUEST,
-                                detail="No domain type specified")
-
-        domain_type = DOMAIN_TYPES.get(matplotlib_render.domain_type_name)                              # Get the correct domain type class
-        if not domain_type:
+        try:
+            bytes_data = self.matplotlib__render.render_graph(matplotlib_render)                                           # Generate the image
+        except ValueError as value_error:
             raise HTTPException(status_code = HTTP_400_BAD_REQUEST,
-                                detail      = f"Unsupported domain type: {matplotlib_render.domain_type_name}")
+                                detail      = value_error.args[0]        )
 
-        graph      = domain_type.from_json(matplotlib_render.graph_data)                                # Reconstruct the graph from JSON
-        renderer   = Matplotlib__Render(graph=graph)                                                    # Create a new renderer for this request
-        bytes_data = renderer.render_graph(matplotlib_render)                                           # Generate the image
         if type(matplotlib_render.output_format) is str:
             format_type = matplotlib_render.output_format
         else:

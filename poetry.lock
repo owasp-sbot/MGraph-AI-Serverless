@@ -815,14 +815,14 @@ files = [
 
 [[package]]
 name = "mgraph-ai"
-version = "0.8.0"
+version = "0.9.0"
 description = "MGraph-AI"
 optional = false
 python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "mgraph_ai-0.8.0-py3-none-any.whl", hash = "sha256:8c7ed71cf603b074f90c39b567d2774f0642f29dacb34239dc6f1006e704cad4"},
-    {file = "mgraph_ai-0.8.0.tar.gz", hash = "sha256:d3de2a34bf5a8f842f9a53d4526f26b2f0feb568d8206fb09ff470c5d07914a3"},
+    {file = "mgraph_ai-0.9.0-py3-none-any.whl", hash = "sha256:70b10816722603b60c19be22af967e4eb7918ffc683a0b7935810170ccde02a4"},
+    {file = "mgraph_ai-0.9.0.tar.gz", hash = "sha256:221ac24d659dfef5d0217a3f4fb487d053c23dd0174099b91d17fefac5fdb8b7"},
 ]
 
 [package.dependencies]

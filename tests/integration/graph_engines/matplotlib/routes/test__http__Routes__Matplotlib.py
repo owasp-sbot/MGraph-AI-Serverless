@@ -1,6 +1,5 @@
 from dataclasses                                                                        import asdict
 from unittest                                                                           import TestCase
-from osbot_utils.utils.Files                                                            import file_create_from_bytes
 from osbot_fast_api.utils.Fast_API_Server                                               import Fast_API_Server
 from mgraph_ai.providers.simple.MGraph__Simple__Test_Data                               import MGraph__Simple__Test_Data
 from mgraph_ai_serverless.testing.mgraph_ai_serverless__objs_for_tests                  import mgraph_ai_serverless__fast_api__app
@@ -22,25 +21,20 @@ class test__http__Routes__Matplotlib(TestCase):
         assert cls.fast_api_server.is_port_open() is False
 
     def test_http__render_graph(self):                                         # Test basic graph rendering
-        render_config = Model__Matplotlib__Render(graph_data       = self.test_graph.graph.json(),
-                                                  domain_type_name ='Domain__Simple__Graph')
-
-        response = self.fast_api_server.requests_post('/matplotlib/render-graph',data=asdict(render_config))
+        render_config = Model__Matplotlib__Render(graph_data       = self.test_graph.graph.json())
+        response      = self.fast_api_server.requests_post('/matplotlib/render-graph',data=asdict(render_config))
 
         assert response.status_code == 200
         assert response.headers['content-type'] == 'image/png'
         assert len(response.content) > 0
         assert response.content.startswith(b'\x89PNG')                         # Verify PNG header
-        file_create_from_bytes('/tmp/test_render.png', response.content)      # Save test output
+        #file_create_from_bytes('/tmp/test_render.png', response.content)      # Save test output
 
     def test_http__render_graph_formats(self):                                # Test different formats
         formats = ['png', 'svg', 'pdf']
         for format in formats:
-            render_config = Model__Matplotlib__Render(
-                graph_data=self.test_graph.graph.json(),
-                domain_type_name='Domain__Simple__Graph',
-                output_format=format
-            )
+            render_config = Model__Matplotlib__Render(graph_data    = self.test_graph.graph.json(),
+                                                      output_format = format                     )
 
             response = self.fast_api_server.requests_post('/matplotlib/render-graph', data=asdict(render_config))
 
@@ -51,11 +45,8 @@ class test__http__Routes__Matplotlib(TestCase):
     def test_http__render_graph_layouts(self):                               # Test different layouts
         layouts = ['spring', 'circular', 'random', 'shell', 'spectral']
         for layout in layouts:
-            render_config = Model__Matplotlib__Render(
-                graph_data=self.test_graph.graph.json(),
-                domain_type_name='Domain__Simple__Graph',
-                layout=layout
-            )
+            render_config = Model__Matplotlib__Render(graph_data = self.test_graph.graph.json(),
+                                                      layout     = layout                      )
 
             response = self.fast_api_server.requests_post('/matplotlib/render-graph', data=asdict(render_config))
 
@@ -64,25 +55,18 @@ class test__http__Routes__Matplotlib(TestCase):
             assert len(response.content) > 0
 
     def test_http__render_graph_errors(self):                               # Test error cases
-        # Test missing graph data
-        render_config = Model__Matplotlib__Render(
-            domain_type_name='Domain__Simple__Graph'
-        )
-        response = self.fast_api_server.requests_post('/matplotlib/render-graph', data=asdict(render_config))
-        assert response.status_code == 400
-
         # Test invalid domain type
-        render_config = Model__Matplotlib__Render(
-            graph_data=self.test_graph.graph.json(),
-            domain_type_name='InvalidDomainType'
-        )
-        response = self.fast_api_server.requests_post('/matplotlib/render-graph', data=asdict(render_config))
-        assert response.status_code == 400
+        graph_data    = MGraph__Simple__Test_Data().graph.json()
+        render_config = Model__Matplotlib__Render(graph_data=graph_data)
+        json_data     = asdict(render_config)
 
-        # Test invalid graph data
-        render_config = Model__Matplotlib__Render(
-            graph_data={'invalid': 'data'},
-            domain_type_name='Domain__Simple__Graph'
-        )
-        response = self.fast_api_server.requests_post('/matplotlib/render-graph', data=asdict(render_config))
-        assert response.status_code == 200
+        json_data['graph_data']['graph_type'] = 'InvalidDomainType'
+        response = self.fast_api_server.requests_post('/matplotlib/render-graph', data=json_data)
+        assert response.status_code == 400
+        assert response.json()['detail'] == 'Unsupported domain type: InvalidDomainType'
+
+        # No graph provided
+        json_data['graph_data'] = {}
+        response = self.fast_api_server.requests_post('/matplotlib/render-graph', data=json_data)
+        assert response.status_code == 400
+        assert response.json()['detail'] == 'No graph provided for rendering'

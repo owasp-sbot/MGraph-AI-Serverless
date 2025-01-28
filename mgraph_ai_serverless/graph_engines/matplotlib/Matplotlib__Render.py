@@ -10,6 +10,10 @@ DOMAIN_TYPES = { type_full_name(Domain__MGraph__Graph      ) : Domain__MGraph__G
                  type_full_name(Domain__Simple__Graph      ) : Domain__Simple__Graph       ,                           # allow-list of supported domain types
                  type_full_name(Domain__MGraph__Json__Graph) : Domain__MGraph__Json__Graph }
 
+# todo: add this env var so that we dont get this error in AWS
+#               Matplotlib created a temporary cache directory at /tmp/matplotlib-r6_022ek because there was an issue with the default path (/home/sbx_user1051/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+#       also look at this error (in AWS Lambda) Fontconfig error: No writable cache directories
+
 class Matplotlib__Render(Type_Safe):
 
 
